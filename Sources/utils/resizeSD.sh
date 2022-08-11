@@ -1,21 +1,38 @@
-# script for lazy ass guy to resize storage after his installs
-# replace mmcblk0 with the correct block name else shit might break
-# default block device is mmcblk1p2 , you fuckmo.
 #!/bin/bash
-START_SECTOR=`cat /sys/block/mmcblk0/mmcblk0p1/start`
-fdisk /dev/mmcblk0  << EOF
+echo "This script is for QortalOS Golem and should only be run with sudo"
+fdisk_first() {
+		p2_start=`fdisk -l /dev/mmcblk1 | grep mmcblk1p2 | awk '{print $2}'`
+		echo "Found the start point of mmcblk1p2: $p2_start" 
+		fdisk /dev/mmcblk1 << __EOF__ >> /dev/null
 d
+2
 n
 p
-1
-$START_SECTOR
- 
+2
+$p2_start
+
+p
 w
+__EOF__
 
-EOF
+		sync
+		touch /root/.resize
+		echo "Storage is now altered and resize is a success. Reboot one time"
+		echo "Once the reboot is done, run this script again to activate the expansion"
+}
 
-echo -e "\n\n\n
-\n============================================================"
-echo "!!!!!expanding rootfs done! reboot the fucking board now "
-echo "!!!!!then run command "resize2fs  /dev/mmcblk0p1" "
-echo -e "=============================================================\n\n\n"
+resize_fs() {
+	echo "Activating the new size"
+	resize2fs /dev/mmcblk1p2 >> /dev/null
+	echo "Done!"
+	echo "Do a df -h to verify just in case!"
+	echo "-_-"
+	rm -rf /root/.resize
+}
+
+
+if [ -f /root/.resize ]; then
+	resize_fs
+else
+	fdisk_first
+fi
