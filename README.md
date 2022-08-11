@@ -7,3 +7,12 @@ There are individual readme files in multiple directories, including the 'kernel
 --- Mick me up in da mool buff! He's going in the mool buff! There's lots of fun for everyone. Ring the door!, Take your seat moosey. Ring the door!, Take your seat moosey. Ring the door!, Take your seat moosey.
 
 -_-
+
+
+
+DONATION ADDRESSES to SUPPORT THE DEVELOPMENT
+
+
+If you would like to donate QORT to the man who made all of this possible, send to registered name 'Scare Crowe' or send to the following address - QdiGEQEr17Jho5RZuhNhzPUX671DqKq3Xt
+
+If you would like to donate to the overall development of Qortal, please send QORT to registered name 'DevFund' or send to the following address - QWfYVQfuz2rVskYkpkVvLxL3kUPmBgKhHV
